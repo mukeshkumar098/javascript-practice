@@ -148,17 +148,118 @@
 //     console.log(`current time=${date.getSeconds()}`);
 // }, 5000)
 
-function count(start, end) {
-    let current = start;
-    const intervalId = setInterval(() => {
-        console.log(current);
-        if (current === end) {
-            clearInterval(intervalId);
-            setTimeout(() => {
-                console.log("times up....")
-            }, 1000)
-        }
-        current--;
-    }, 1000)
+// function count(start, end) {
+//     let current = start;
+//     const intervalId = setInterval(() => {
+//         console.log(current);
+//         if (current === end) {
+//             clearInterval(intervalId);
+//             setTimeout(() => {
+//                 console.log("times up....")
+//             }, 1000)
+//         }
+//         current--;
+//     }, 1000)
+// }
+// count(5, 0)
+
+
+
+
+const user = [
+    { id: 1, name: "alice", email: "alice@example.com", age: 28, balance: 5000, isActive: true },
+    { id: 2, name: "Bob", email: "Bob@example.com", age: 34, balance: 3000, isActive: false },
+    { id: 3, name: "charlie", email: " cahrlie @example.com", age: 22, balance: 7000, isActive: true },
+    { id: 4, name: "Diana", email: "Diana@example.com", age: 29, balance: 4000, isActive: false },
+    { id: 5, name: "Eve", email: "Eve@example.com", age: 35, balance: 10000, isActive: true }
+]
+
+
+
+// Q1:- callback implementatin
+
+// function fetchUserByIdCallBack(id, callback) {
+//     if (!id) return callback("id  not found");
+//     if (typeof id !== "number") return callback("invailid id")
+//     setTimeout(() => {
+//         let users = user.find((ele) => ele.id == id);
+//         if (user) {
+//             callback(users);
+//         } else {
+//             callback("data not found")
+//         }
+//     }, 2000);
+
+// }
+// fetchUserByIdCallBack(2, ((result) => {
+//     console.log(result);
+
+// }))
+// async function asumeId() {
+//     try {
+//         let result = await fetchUserByIdCallBack(3, ((data) => {
+//             console.log(data);
+//         }))
+//     } catch (error) {
+//         console.log(error);
+
+
+//     }
+// }
+// asumeId()
+
+// Q3:- promise creation
+// function fetchUserByIdpromise(id) {
+//     // if (!id) return ("id not found")
+//     // if (typeof id !== "number") return ("invalid id")
+//     return new Promise((resolve, reject) => {
+//         setTimeout(() => {
+//             let users = user.find((ele) => ele.id == id);
+//             if (user) {
+//                 resolve(users)
+//             } else {
+//                 reject("error", )
+//             }
+//         }, 2000)
+//     })
+// }
+// fetchUserByIdpromise(8).then((data) => {
+//     console.log(data);
+
+// }).catch((err) => {
+//     console.log(err);
+
+// })
+
+
+
+// Q5:-async await with promise
+
+
+function fetchUserByIdpromise(id) {
+    if (!id) return ("id not found")
+    if (typeof id !== "number") return ("invalid id")
+    return new Promise((resolve, reject) => {
+        setTimeout(() => {
+            let users = user.find((ele) => ele.id == id);
+            if (user) {
+                resolve(users)
+            } else {
+                reject("data not found")
+            }
+        }, 2000)
+    })
 }
-count(5, 0)
+async function asumeUserId() {
+    // let result = await fetchUserByIdpromise(1)
+    // console.log(result);
+    try {
+        let result = await fetchUserByIdpromise(9);
+        console.log(result);
+    } catch (error) {
+        console.log(error);
+
+    }
+
+}
+asumeUserId()

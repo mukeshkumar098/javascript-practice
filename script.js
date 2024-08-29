@@ -178,23 +178,27 @@ const user = [
 
 // Q1:- callback implementatin
 
-// function fetchUserByIdCallBack(id, callback) {
-//     if (!id) return callback("id  not found");
-//     if (typeof id !== "number") return callback("invailid id")
-//     setTimeout(() => {
-//         let users = user.find((ele) => ele.id == id);
-//         if (user) {
-//             callback(users);
+function fetchUserByIdCallBack(id, callback) {
+    if (!id) return callback("id  not found", null);
+    if (typeof id !== "number") return callback("invailid id", null)
+    setTimeout(() => {
+        let users = user.find((ele) => ele.id == id);
+        if (users) {
+            callback(null, user);
+        } else {
+            callback("data not found", null)
+        }
+    }, 2000);
+
+}
+// fetchUserByIdCallBack(2, ((arr, result) => {
+//         if (err) {
+//             console.error(err)
 //         } else {
-//             callback("data not found")
+//             console.log(result);
 //         }
-//     }, 2000);
 
-// }
-// fetchUserByIdCallBack(2, ((result) => {
-//     console.log(result);
-
-// }))
+//     }))
 // async function asumeId() {
 //     try {
 //         let result = await fetchUserByIdCallBack(3, ((data) => {
@@ -210,8 +214,8 @@ const user = [
 
 // Q3:- promise creation
 // function fetchUserByIdpromise(id) {
-//     // if (!id) return ("id not found")
-//     // if (typeof id !== "number") return ("invalid id")
+//     // if (!id) =reject ("id not found")
+//     // if (typeof id !== "number") reject("invalid id")
 //     return new Promise((resolve, reject) => {
 //         setTimeout(() => {
 //             let users = user.find((ele) => ele.id == id);
@@ -237,8 +241,8 @@ const user = [
 
 
 function fetchUserByIdpromise(id) {
-    if (!id) return ("id not found")
-    if (typeof id !== "number") return ("invalid id")
+    if (!id) rejrct("id not found")
+    if (typeof id !== "number") reject("invalid id")
     return new Promise((resolve, reject) => {
         setTimeout(() => {
             let users = user.find((ele) => ele.id == id);
